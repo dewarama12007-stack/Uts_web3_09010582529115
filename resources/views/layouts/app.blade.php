@@ -179,7 +179,7 @@
     <!-- Main Workspace Container -->
     <div class="lg:pl-[260px] min-h-screen flex flex-col transition-all">
         <!-- Top App Bar -->
-        <header class="fixed top-0 left-0 lg:left-[260px] right-0 h-16 bg-surface-container-lowest border-b border-outline-variant/30 z-30 px-4 sm:px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+        <header class="sticky top-0 z-30 w-full h-16 bg-surface-container-lowest border-b border-outline-variant/30 px-4 sm:px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
             <div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant">
                 <button type="button" onclick="toggleSidebar()" class="lg:hidden p-1.5 text-on-surface-variant hover:text-on-surface rounded-lg mr-1 focus:outline-none" aria-label="Buka menu">
                     <span class="material-symbols-outlined text-[24px]">menu</span>
@@ -215,7 +215,7 @@
         </header>
 
         <!-- Main Body -->
-        <main class="w-full pt-16 p-4 sm:p-6 lg:p-8 bg-background flex-1">
+        <main class="w-full p-4 sm:p-6 lg:p-8 bg-background flex-1">
             @if(session('success'))
                 <div class="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between text-emerald-800 text-sm shadow-xs transition-opacity duration-300" id="flash-success">
                     <div class="flex items-center gap-2">
