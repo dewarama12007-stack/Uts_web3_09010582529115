@@ -25,10 +25,17 @@ class CategorySeeder extends Seeder
                 'name' => 'Teknologi',
                 'description' => 'Buku-buku tentang teknologi, pemrograman, dan ilmu komputer.',
             ],
+            [
+                'name' => 'Manga & Komik',
+                'description' => 'Koleksi serial komik dan manga Jepang populer dari berbagai genre.',
+            ],
         ];
 
         foreach ($categories as $category) {
-            Category::create($category);
+            Category::firstOrCreate(
+                ['name' => $category['name']],
+                $category
+            );
         }
     }
 }

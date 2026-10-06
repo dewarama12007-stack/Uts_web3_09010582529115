@@ -144,7 +144,21 @@
                                         {{ $book->author }}
                                     </td>
                                     <td class="py-4 px-space-lg text-xs">
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full font-semibold bg-primary-fixed text-primary-container">
+                                        @php
+                                            $bCat = strtolower($book->category->name ?? '');
+                                            if (str_contains($bCat, 'manga') || str_contains($bCat, 'komik')) {
+                                                $badgeClass = 'bg-rose-50 text-rose-700 border border-rose-200';
+                                            } elseif (str_contains($bCat, 'fiksi')) {
+                                                $badgeClass = 'bg-purple-50 text-purple-700 border border-purple-200';
+                                            } elseif (str_contains($bCat, 'teknologi')) {
+                                                $badgeClass = 'bg-blue-50 text-blue-700 border border-blue-200';
+                                            } elseif (str_contains($bCat, 'sains') || str_contains($bCat, 'non')) {
+                                                $badgeClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+                                            } else {
+                                                $badgeClass = 'bg-primary-fixed text-primary-container';
+                                            }
+                                        @endphp
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full font-semibold {{ $badgeClass }}">
                                             {{ $book->category->name }}
                                         </span>
                                     </td>

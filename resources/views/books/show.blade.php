@@ -5,7 +5,10 @@
 @section('content')
 @php
     $catName = strtolower($book->category->name ?? '');
-    if (str_contains($catName, 'fiksi')) {
+    if (str_contains($catName, 'manga') || str_contains($catName, 'komik')) {
+        $cardGradient = 'from-slate-950 via-rose-900 to-amber-950';
+        $accentColor = '#fb7185';
+    } elseif (str_contains($catName, 'fiksi')) {
         $cardGradient = 'from-indigo-950 via-purple-900 to-slate-900';
         $accentColor = '#c084fc';
     } elseif (str_contains($catName, 'teknologi')) {

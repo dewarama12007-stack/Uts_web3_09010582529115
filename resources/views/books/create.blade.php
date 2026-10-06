@@ -341,7 +341,18 @@
             if (previewCategory && categorySelect) {
                 const selected = categorySelect.options[categorySelect.selectedIndex];
                 if (selected && selected.value) {
-                    previewCategory.textContent = selected.text.split('(')[0].trim();
+                    const catText = selected.text.split('(')[0].trim();
+                    previewCategory.textContent = catText;
+                    const catLower = catText.toLowerCase();
+                    const card = document.getElementById('previewCard');
+                    if (card) {
+                        card.className = "p-4 rounded-xl text-white shadow-md relative overflow-hidden flex flex-col justify-between h-56 transition-all duration-300 " +
+                            (catLower.includes('manga') || catLower.includes('komik') ? 'bg-gradient-to-br from-slate-950 via-rose-900 to-amber-950' :
+                             catLower.includes('fiksi') ? 'bg-gradient-to-br from-indigo-950 via-purple-900 to-slate-900' :
+                             catLower.includes('teknologi') ? 'bg-gradient-to-br from-slate-950 via-blue-900 to-indigo-950' :
+                             catLower.includes('non') ? 'bg-gradient-to-br from-slate-950 via-emerald-900 to-teal-950' :
+                             'bg-gradient-to-br from-primary-container via-primary to-inverse-surface');
+                    }
                 } else {
                     previewCategory.textContent = 'Pilih Kategori';
                 }

@@ -214,9 +214,23 @@
                                     </span>
                                 </td>
                                 <td class="py-4 px-6 text-xs">
+                                    @php
+                                        $bCat = strtolower($book->category->name ?? '');
+                                        if (str_contains($bCat, 'manga') || str_contains($bCat, 'komik')) {
+                                            $badgeClass = 'bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-600 hover:text-white';
+                                        } elseif (str_contains($bCat, 'fiksi')) {
+                                            $badgeClass = 'bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-600 hover:text-white';
+                                        } elseif (str_contains($bCat, 'teknologi')) {
+                                            $badgeClass = 'bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-600 hover:text-white';
+                                        } elseif (str_contains($bCat, 'sains') || str_contains($bCat, 'non')) {
+                                            $badgeClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-600 hover:text-white';
+                                        } else {
+                                            $badgeClass = 'bg-primary-fixed text-primary-container hover:bg-primary-container hover:text-white';
+                                        }
+                                    @endphp
                                     <a href="{{ route('books.index', ['category' => $book->category_id]) }}" 
-                                       class="inline-flex items-center px-3 py-1 rounded-full font-semibold bg-primary-fixed text-primary-container hover:bg-primary-container hover:text-white transition-colors"
-                                       title="Filter kategori ini">
+                                       class="inline-flex items-center px-3 py-1 rounded-full font-semibold {{ $badgeClass }} transition-colors"
+                                       title="Filter kategori {{ $book->category->name }}">
                                         {{ $book->category->name }}
                                     </a>
                                 </td>

@@ -266,7 +266,21 @@
                 </span>
             </div>
 
-            <div class="p-4 rounded-xl bg-gradient-to-br from-primary-container via-primary to-inverse-surface text-white shadow-md relative overflow-hidden flex flex-col justify-between h-56 transition-all duration-300">
+            @php
+                $editCatName = strtolower($book->category->name ?? '');
+                if (str_contains($editCatName, 'manga') || str_contains($editCatName, 'komik')) {
+                    $initialGradient = 'from-slate-950 via-rose-900 to-amber-950';
+                } elseif (str_contains($editCatName, 'fiksi')) {
+                    $initialGradient = 'from-indigo-950 via-purple-900 to-slate-900';
+                } elseif (str_contains($editCatName, 'teknologi')) {
+                    $initialGradient = 'from-slate-950 via-blue-900 to-indigo-950';
+                } elseif (str_contains($editCatName, 'sains') || str_contains($editCatName, 'non')) {
+                    $initialGradient = 'from-slate-950 via-emerald-900 to-teal-950';
+                } else {
+                    $initialGradient = 'from-primary-container via-primary to-inverse-surface';
+                }
+            @endphp
+            <div id="previewCard" class="p-4 rounded-xl bg-gradient-to-br {{ $initialGradient }} text-white shadow-md relative overflow-hidden flex flex-col justify-between h-56 transition-all duration-300">
                 <div class="flex items-center justify-between text-xs">
                     <span class="px-2 py-0.5 rounded bg-white/20 text-white font-mono text-[10px]">EDISI KATALOG</span>
                     <span class="material-symbols-outlined text-[20px] text-white/70">local_library</span>
@@ -337,7 +351,18 @@
             if (previewCategory && categorySelect) {
                 const selected = categorySelect.options[categorySelect.selectedIndex];
                 if (selected && selected.value) {
-                    previewCategory.textContent = selected.text.split('(')[0].trim();
+                    const catText = selected.text.split('(')[0].trim();
+                    previewCategory.textContent = catText;
+                    const catLower = catText.toLowerCase();
+                    const card = document.getElementById('previewCard');
+                    if (card) {
+                        card.className = "p-4 rounded-xl text-white shadow-md relative overflow-hidden flex flex-col justify-between h-56 transition-all duration-300 " +
+                            (catLower.includes('manga') || catLower.includes('komik') ? 'bg-gradient-to-br from-slate-950 via-rose-900 to-amber-950' :
+                             catLower.includes('fiksi') ? 'bg-gradient-to-br from-indigo-950 via-purple-900 to-slate-900' :
+                             catLower.includes('teknologi') ? 'bg-gradient-to-br from-slate-950 via-blue-900 to-indigo-950' :
+                             catLower.includes('non') ? 'bg-gradient-to-br from-slate-950 via-emerald-900 to-teal-950' :
+                             'bg-gradient-to-br from-primary-container via-primary to-inverse-surface');
+                    }
                 }
             }
         }
@@ -346,6 +371,8 @@
             if (el) el.addEventListener('input', updatePreview);
         });
         if (categorySelect) categorySelect.addEventListener('change', updatePreview);
+
+        updatePreview();
     });
 </script>
 @endsection
