@@ -212,7 +212,7 @@
                     <span class="material-symbols-outlined text-[14px] text-emerald-600">check_circle</span>
                     Katalog Sinkron
                 </span>
-                <span class="font-mono text-[11px]">UTS Web 2026</span>
+                <span class="font-mono text-[11px]">Katalog Aktif</span>
             </div>
         </div>
     </div>

@@ -162,16 +162,13 @@
         </div>
 
         <!-- Sidebar Footer -->
-        <div class="p-space-md border-t border-outline-variant/30 flex flex-col gap-1">
-            <div class="px-space-md py-0.5 flex items-center justify-between text-secondary font-label-sm text-xs">
+        <div class="p-space-md border-t border-outline-variant/30">
+            <div class="px-space-md py-space-xs flex items-center justify-between text-secondary font-label-sm text-xs">
                 <span class="font-medium text-on-surface">KireiLibrary v1.0</span>
                 <span class="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-semibold">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                     Aktif
                 </span>
-            </div>
-            <div class="px-space-md text-[11px] text-secondary font-mono">
-                Dewa Rama danieal
             </div>
         </div>
     </aside>

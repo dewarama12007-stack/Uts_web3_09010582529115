@@ -180,16 +180,12 @@
                     </div>
 
                     <!-- Left Panel Institutional Meta Footer -->
-                    <div class="relative z-10 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-surface-container-low/75 border-t border-white/10">
+                    <div class="relative z-10 pt-6 flex items-center justify-between text-xs text-surface-container-low/75 border-t border-white/10">
                         <div class="flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                            <span>Server Repositori Aktif (UTS Pemrograman Web)</span>
+                            <span>Sistem Repositori Aktif</span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <span>Dewa Rama danieal</span>
-                            <span>•</span>
-                            <span>09010582529115</span>
-                        </div>
+                        <span class="font-mono text-[11px]">v1.0</span>
                     </div>
                 </div>
 
@@ -245,7 +241,7 @@
                                             placeholder="admin@perpustakaan.com" 
                                             required 
                                             type="email" 
-                                            value="{{ old('email', 'admin@perpustakaan.com') }}"
+                                            value="{{ old('email') }}"
                                             autofocus
                                         >
                                         <div class="absolute right-3 pointer-events-none text-slate-400 flex items-center">
@@ -269,7 +265,7 @@
                                             placeholder="Masukkan kata sandi" 
                                             required 
                                             type="password"
-                                            value="password"
+                                            value=""
                                         >
                                         <button 
                                             aria-label="Lihat atau sembunyikan kata sandi" 
@@ -308,20 +304,8 @@
                                 </button>
                             </form>
 
-                            <!-- Demo Credentials Helper -->
-                            <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col gap-1 text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200/60">
-                                <div class="font-semibold text-slate-700 flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[14px] text-indigo-600">badge</span>
-                                    Akun Demo Penguji / Dosen:
-                                </div>
-                                <div class="flex justify-between text-slate-600 font-mono text-[11px] mt-0.5">
-                                    <span>Email: <strong>admin@perpustakaan.com</strong></span>
-                                    <span>Pass: <strong>password</strong></span>
-                                </div>
-                            </div>
-
                             <!-- Security Badge -->
-                            <div class="mt-4 flex items-center justify-center gap-2 text-xs text-slate-400 font-medium">
+                            <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-center gap-2 text-xs text-slate-400 font-medium">
                                 <span class="material-symbols-outlined text-[16px] text-emerald-600">verified_user</span>
                                 <span>Koneksi Terenkripsi & Aman</span>
                             </div>
@@ -329,7 +313,7 @@
 
                         <!-- Footer -->
                         <div class="text-center mt-6">
-                            <p class="text-xs text-slate-400 font-normal">© 2026 KireiLibrary • UTS Pemrograman Web</p>
+                            <p class="text-xs text-slate-400 font-normal">© {{ date('Y') }} KireiLibrary. Hak cipta dilindungi.</p>
                         </div>
                     </div>
                 </div>
