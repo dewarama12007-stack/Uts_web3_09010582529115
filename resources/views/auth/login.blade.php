@@ -180,12 +180,12 @@
                     </div>
 
                     <!-- Left Panel Institutional Meta Footer -->
-                    <div class="relative z-10 pt-6 flex items-center justify-between text-xs text-surface-container-low/75 border-t border-white/10">
+                    <div class="relative z-10 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-surface-container-low/75 border-t border-white/10">
                         <div class="flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                            <span>Sistem Repositori Aktif</span>
+                            <span>Sistem Manajemen Perpustakaan Terpadu</span>
                         </div>
-                        <span class="font-mono text-[11px]">v1.0</span>
+                        <span class="font-mono text-[11px] text-white/70">KireiLibrary v1.0</span>
                     </div>
                 </div>
 
@@ -241,7 +241,7 @@
                                             placeholder="admin@perpustakaan.com" 
                                             required 
                                             type="email" 
-                                            value="{{ old('email') }}"
+                                            value="{{ old('email', 'admin@perpustakaan.com') }}"
                                             autofocus
                                         >
                                         <div class="absolute right-3 pointer-events-none text-slate-400 flex items-center">
@@ -265,7 +265,7 @@
                                             placeholder="Masukkan kata sandi" 
                                             required 
                                             type="password"
-                                            value=""
+                                            value="password"
                                         >
                                         <button 
                                             aria-label="Lihat atau sembunyikan kata sandi" 
@@ -313,7 +313,7 @@
 
                         <!-- Footer -->
                         <div class="text-center mt-6">
-                            <p class="text-xs text-slate-400 font-normal">© {{ date('Y') }} KireiLibrary. Hak cipta dilindungi.</p>
+                            <p class="text-xs text-slate-400 font-normal">© {{ date('Y') }} KireiLibrary. Sistem Manajemen Perpustakaan.</p>
                         </div>
                     </div>
                 </div>

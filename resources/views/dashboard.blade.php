@@ -212,7 +212,7 @@
                     <span class="material-symbols-outlined text-[14px] text-emerald-600">check_circle</span>
                     Katalog Sinkron
                 </span>
-                <span class="font-mono text-[11px]">Katalog Aktif</span>
+                <span class="font-mono text-[11px]">v1.0.0</span>
             </div>
         </div>
     </div>
