@@ -5,6 +5,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>@yield('title', 'KireiLibrary') - Perpustakaan</title>
     
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    
     <!-- Google Fonts & Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -112,9 +115,7 @@
         <div class="flex flex-col">
             <!-- Brand / Logo -->
             <div class="h-16 px-space-lg flex items-center gap-space-sm border-b border-outline-variant/30">
-                <div class="w-8 h-8 rounded-lg bg-primary-container text-white flex items-center justify-center font-bold text-sm shadow-sm">
-                    <span class="material-symbols-outlined text-[20px]">menu_book</span>
-                </div>
+                <img src="{{ asset('images/logo.svg') }}" alt="Logo KireiLibrary" class="w-9 h-9 rounded-lg shadow-sm object-contain">
                 <div class="flex flex-col">
                     <span class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight leading-none">KireiLibrary</span>
                     <span class="text-[10px] text-secondary font-medium tracking-wide">Sistem Perpustakaan</span>

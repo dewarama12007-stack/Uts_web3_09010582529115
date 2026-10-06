@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="50%" stop-color="#3730A3"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+    <linearGradient id="petal-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0E7FF"/>
+    </linearGradient>
+    <linearGradient id="petal-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C7D2FE"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="accent-glow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A5B4FC"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1E1B4B" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background Container with rounded squircle -->
+  <rect width="512" height="512" rx="120" fill="url(#bg-grad)"/>
+
+  <!-- Subtle glow ring -->
+  <circle cx="256" cy="230" r="160" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2"/>
+  <circle cx="256" cy="230" r="190" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1.5" stroke-dasharray="8 8"/>
+
+  <!-- Logo Icon Mark (Harmonious combination of Open Book pages & Lotus/Cherry Blossom Petal 'Kirei') -->
+  <g filter="url(#shadow)" transform="translate(0, 10)">
+    <!-- Central Stem / Spine -->
+    <path d="M256,155 L256,310" stroke="#EEF2FF" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Left Book Page / Petal Wing (Outer) -->
+    <path d="M256,305 C210,295 160,250 148,185 C142,152 165,140 188,155 C215,172 242,215 256,245 Z" fill="url(#petal-left)" opacity="0.95"/>
+
+    <!-- Right Book Page / Petal Wing (Outer) -->
+    <path d="M256,305 C302,295 352,250 364,185 C370,152 347,140 324,155 C297,172 270,215 256,245 Z" fill="url(#petal-right)"/>
+
+    <!-- Left Inner Page Layer -->
+    <path d="M256,290 C225,275 190,240 182,192 C178,168 195,160 210,172 C230,188 248,222 256,245 Z" fill="#EEF2FF" opacity="0.85"/>
+
+    <!-- Right Inner Page Layer -->
+    <path d="M256,290 C287,275 322,240 330,192 C334,168 317,160 302,172 C282,188 264,222 256,245 Z" fill="url(#accent-glow)" opacity="0.9"/>
+
+    <!-- Top Blooming Bud / Star / Sparkle of Knowledge -->
+    <path d="M256,128 C258,140 266,148 278,150 C266,152 258,160 256,172 C254,160 246,152 234,150 C246,148 254,140 256,128 Z" fill="#FDE047"/>
+
+    <!-- Base gentle book pedestal curve -->
+    <path d="M220,324 C238,332 274,332 292,324" fill="none" stroke="#C7D2FE" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Typography: KireiLibrary -->
+  <text x="256" y="398" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" font-weight="700" font-size="34" fill="#FFFFFF" letter-spacing="1">Kirei<tspan fill="#A5B4FC" font-weight="400">Library</tspan></text>
+  
+  <!-- Subtitle Tagline: Perpustakaan yang Indah -->
+  <text x="256" y="428" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" font-weight="500" font-size="13" fill="#C7D2FE" letter-spacing="3">PERPUSTAKAAN YANG INDAH</text>
+</svg>

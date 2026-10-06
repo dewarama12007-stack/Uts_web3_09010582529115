@@ -5,6 +5,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Login - KireiLibrary Perpustakaan</title>
     
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    
     <!-- Google Fonts & Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -104,9 +107,7 @@
 
                     <!-- Top Header Brand Element -->
                     <div class="relative z-10 flex items-center gap-3.5">
-                        <div class="w-12 h-12 rounded-xl bg-surface-container-lowest p-2 shadow-xl flex items-center justify-center text-primary-container">
-                            <span class="material-symbols-outlined text-[28px]">menu_book</span>
-                        </div>
+                        <img src="{{ asset('images/logo.svg') }}" alt="Logo KireiLibrary" class="w-12 h-12 rounded-xl shadow-xl object-contain bg-surface-container-lowest p-1.5">
                         <div class="flex flex-col">
                             <span class="font-headline-lg text-2xl font-bold tracking-tight text-white leading-none">KireiLibrary</span>
                             <span class="font-label-sm text-xs text-primary-fixed-dim/80 uppercase tracking-widest mt-1">Perpustakaan yang Indah</span>
@@ -199,6 +200,13 @@
                         <div class="bg-surface-container-lowest rounded-2xl shadow-lg border border-slate-200/80 p-8 sm:p-10 flex flex-col transition-all">
                             <!-- Header -->
                             <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <img src="{{ asset('images/logo.svg') }}" alt="Logo KireiLibrary" class="w-10 h-10 rounded-xl shadow-sm object-contain">
+                                    <div class="flex flex-col">
+                                        <span class="font-bold text-sm text-slate-800 leading-none">KireiLibrary</span>
+                                        <span class="text-[10px] text-slate-500">Perpustakaan</span>
+                                    </div>
+                                </div>
                                 <div class="inline-flex items-center gap-1.5 text-primary-container text-xs uppercase tracking-wider font-semibold mb-2">
                                     <span class="material-symbols-outlined text-[16px]">lock_person</span>
                                     Autentikasi Pengelola
