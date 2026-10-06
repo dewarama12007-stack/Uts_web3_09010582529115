@@ -165,4 +165,56 @@ class LibraryTest extends TestCase
         $this->assertGuest();
         $response->assertRedirect('/login');
     }
+
+    public function test_authenticated_user_can_export_books_csv(): void
+    {
+        $user = User::first();
+
+        $response = $this->actingAs($user)->get('/books/export');
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+        $this->assertStringContainsString('katalog-buku-', $response->headers->get('Content-Disposition'));
+    }
+
+    public function test_books_search_and_filter_functionality(): void
+    {
+        $user = User::first();
+
+        // Search by title
+        $response = $this->actingAs($user)->get('/books?search=Pelangi');
+        $response->assertStatus(200);
+        $response->assertSee('Laskar Pelangi');
+        $response->assertDontSee('Clean Code');
+
+        // Filter by category
+        $category = Category::where('name', 'Teknologi')->first();
+        $response = $this->actingAs($user)->get('/books?category=' . $category->id);
+        $response->assertStatus(200);
+        $response->assertSee('Clean Code');
+        $response->assertDontSee('Laskar Pelangi');
+    }
+
+    public function test_book_validation_fails_with_invalid_data(): void
+    {
+        $user = User::first();
+
+        $response = $this->actingAs($user)->post('/books', [
+            'title' => '',
+            'author' => '',
+            'publisher' => '',
+            'year' => 1800,
+            'stock' => -5,
+            'category_id' => 999999,
+        ]);
+
+        $response->assertSessionHasErrors([
+            'title',
+            'author',
+            'publisher',
+            'year',
+            'stock',
+            'category_id',
+        ]);
+    }
 }

@@ -255,32 +255,37 @@
         </div>
 
         <!-- Book Preview Card (Span 4) -->
-        <div class="lg:col-span-4 bg-surface-container-lowest rounded-xl shadow-xs border border-outline-variant/30 p-6 flex flex-col gap-4">
-            <h3 class="text-sm font-bold text-on-surface flex items-center gap-2">
-                <span class="material-symbols-outlined text-[18px] text-primary-container">preview</span>
-                Ringkasan Koleksi
-            </h3>
+        <div class="lg:col-span-4 bg-surface-container-lowest rounded-xl shadow-xs border border-outline-variant/30 p-6 flex flex-col gap-4 sticky top-24">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px] text-primary-container">preview</span>
+                    Ringkasan Koleksi
+                </h3>
+                <span class="text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-2 py-0.5 rounded-full border border-emerald-200">
+                    Realtime
+                </span>
+            </div>
 
-            <div class="p-4 rounded-xl bg-gradient-to-br from-primary-container via-primary to-inverse-surface text-white shadow-md relative overflow-hidden flex flex-col justify-between h-56">
+            <div class="p-4 rounded-xl bg-gradient-to-br from-primary-container via-primary to-inverse-surface text-white shadow-md relative overflow-hidden flex flex-col justify-between h-56 transition-all duration-300">
                 <div class="flex items-center justify-between text-xs">
                     <span class="px-2 py-0.5 rounded bg-white/20 text-white font-mono text-[10px]">EDISI KATALOG</span>
                     <span class="material-symbols-outlined text-[20px] text-white/70">local_library</span>
                 </div>
                 <div>
-                    <span class="text-[10px] uppercase tracking-wider text-primary-fixed-dim">{{ $book->category->name }}</span>
-                    <h4 class="text-lg font-bold text-white leading-snug line-clamp-2">{{ $book->title }}</h4>
-                    <p class="text-xs text-primary-fixed-dim/90 mt-1">{{ $book->author }}</p>
+                    <span id="previewCategory" class="text-[10px] uppercase tracking-wider text-primary-fixed-dim">{{ $book->category->name }}</span>
+                    <h4 id="previewTitle" class="text-lg font-bold text-white leading-snug line-clamp-2">{{ $book->title }}</h4>
+                    <p id="previewAuthor" class="text-xs text-primary-fixed-dim/90 mt-1">{{ $book->author }}</p>
                 </div>
                 <div class="flex items-center justify-between text-[11px] text-white/80 pt-2 border-t border-white/10 font-mono">
-                    <span>{{ $book->publisher }}</span>
-                    <span>{{ $book->year }}</span>
+                    <span id="previewPublisher" class="truncate max-w-[150px]">{{ $book->publisher }}</span>
+                    <span id="previewYear">{{ $book->year }}</span>
                 </div>
             </div>
 
             <div class="flex flex-col gap-2 pt-2 border-t border-outline-variant/20 text-xs text-secondary">
                 <div class="flex justify-between">
                     <span>Stok Saat Ini:</span>
-                    <strong class="text-on-surface">{{ $book->stock }} eksemplar</strong>
+                    <strong id="previewStock" class="text-on-surface">{{ $book->stock }} eksemplar</strong>
                 </div>
                 <div class="flex justify-between">
                     <span>Dibuat:</span>
@@ -294,4 +299,53 @@
         </div>
     </div>
 </div>
+
+<!-- Interactive Live Preview Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const titleInput = document.getElementById('title');
+        const authorInput = document.getElementById('author');
+        const publisherInput = document.getElementById('publisher');
+        const yearInput = document.getElementById('year');
+        const stockInput = document.getElementById('stock');
+        const categorySelect = document.getElementById('category_id');
+
+        const previewTitle = document.getElementById('previewTitle');
+        const previewAuthor = document.getElementById('previewAuthor');
+        const previewPublisher = document.getElementById('previewPublisher');
+        const previewYear = document.getElementById('previewYear');
+        const previewStock = document.getElementById('previewStock');
+        const previewCategory = document.getElementById('previewCategory');
+
+        function updatePreview() {
+            if (previewTitle && titleInput) {
+                previewTitle.textContent = titleInput.value.trim() || 'Judul Buku';
+            }
+            if (previewAuthor && authorInput) {
+                previewAuthor.textContent = authorInput.value.trim() || 'Nama Penulis';
+            }
+            if (previewPublisher && publisherInput) {
+                previewPublisher.textContent = publisherInput.value.trim() || 'Nama Penerbit';
+            }
+            if (previewYear && yearInput) {
+                previewYear.textContent = yearInput.value.trim() || 'Tahun';
+            }
+            if (previewStock && stockInput) {
+                const stockVal = stockInput.value.trim();
+                previewStock.textContent = (stockVal !== '' ? stockVal : '0') + ' eksemplar';
+            }
+            if (previewCategory && categorySelect) {
+                const selected = categorySelect.options[categorySelect.selectedIndex];
+                if (selected && selected.value) {
+                    previewCategory.textContent = selected.text.split('(')[0].trim();
+                }
+            }
+        }
+
+        [titleInput, authorInput, publisherInput, yearInput, stockInput].forEach(el => {
+            if (el) el.addEventListener('input', updatePreview);
+        });
+        if (categorySelect) categorySelect.addEventListener('change', updatePreview);
+    });
+</script>
 @endsection

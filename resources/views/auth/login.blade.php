@@ -186,7 +186,7 @@
                             <span>Server Repositori Aktif (UTS Pemrograman Web)</span>
                         </div>
                         <div class="flex items-center gap-3">
-                            <span>Dewa Rama Daniel</span>
+                            <span>Dewa Rama danieal</span>
                             <span>•</span>
                             <span>09010582529115</span>
                         </div>

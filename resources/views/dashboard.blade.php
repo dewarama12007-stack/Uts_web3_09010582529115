@@ -15,7 +15,12 @@
                 Selamat datang, <strong>{{ Auth::user()->name }}</strong>. Pantau ketersediaan koleksi dan pergerakan pustaka hari ini.
             </p>
         </div>
-        <div class="flex items-center gap-space-sm">
+        <div class="flex items-center gap-space-sm flex-wrap">
+            <a href="{{ route('books.export') }}" 
+               class="bg-surface-container-lowest hover:bg-surface-container-low text-emerald-700 font-label-md text-sm px-4 py-2.5 rounded-lg shadow-xs flex items-center gap-1.5 transition-colors border border-emerald-200">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span>Unduh Laporan CSV</span>
+            </a>
             <a href="{{ route('books.index') }}" 
                class="bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant font-label-md text-sm px-4 py-2.5 rounded-lg shadow-xs flex items-center gap-1.5 transition-colors border border-outline-variant/30">
                 <span class="material-symbols-outlined text-[18px]">menu_book</span>
@@ -188,15 +193,17 @@
 
             <div class="flex flex-col gap-space-sm flex-1">
                 @foreach($categories as $category)
-                    <div class="p-3 rounded-lg bg-surface-container-low/60 border border-outline-variant/30 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+                    <a href="{{ route('books.index', ['category' => $category->id]) }}" 
+                       class="p-3 rounded-lg bg-surface-container-low/60 border border-outline-variant/30 flex items-center justify-between hover:bg-surface-container hover:border-primary-container/40 transition-all group"
+                       title="Lihat semua buku dalam kategori {{ $category->name }}">
                         <div class="flex flex-col">
-                            <span class="font-semibold text-sm text-on-surface">{{ $category->name }}</span>
+                            <span class="font-semibold text-sm text-on-surface group-hover:text-primary-container transition-colors">{{ $category->name }}</span>
                             <span class="text-[11px] text-secondary line-clamp-1">{{ $category->description ?? 'Kategori buku' }}</span>
                         </div>
-                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-surface-container-lowest text-primary-container shadow-xs">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-surface-container-lowest text-primary-container shadow-xs group-hover:bg-primary-container group-hover:text-white transition-colors">
                             {{ $category->books_count }} judul
                         </span>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 
