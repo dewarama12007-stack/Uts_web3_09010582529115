@@ -1,327 +1,350 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login ke Sistem Manajemen Perpustakaan">
-    <title>Login - Sistem Perpustakaan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Login - KireiLibrary Perpustakaan</title>
+    
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0f172a;
-            position: relative;
-            overflow: hidden;
+        @layer base {
+            html, body { margin: 0; padding: 0; }
+            body { overscroll-behavior: none; }
+            main > :first-child { margin-top: 0 !important; }
+            main > :last-child { margin-bottom: 0 !important; }
         }
-        /* Animated gradient background */
-        .bg-gradient {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
-        }
-        .bg-gradient::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 50%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
-            animation: bgPulse 15s ease-in-out infinite;
-        }
-        @keyframes bgPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.05) rotate(2deg); }
-        }
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: rgba(99, 102, 241, 0.4);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite;
-        }
-        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
-        .particle:nth-child(2) { left: 30%; top: 70%; animation-delay: 1s; animation-duration: 9s; }
-        .particle:nth-child(3) { left: 60%; top: 30%; animation-delay: 2s; animation-duration: 6s; }
-        .particle:nth-child(4) { left: 80%; top: 60%; animation-delay: 3s; animation-duration: 8s; }
-        .particle:nth-child(5) { left: 50%; top: 80%; animation-delay: 1.5s; animation-duration: 10s; }
-        .particle:nth-child(6) { left: 20%; top: 50%; animation-delay: 2.5s; animation-duration: 7s; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
-            50% { transform: translateY(-40px) scale(1.5); opacity: 0.8; }
-        }
-
-        .login-container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 440px;
-            padding: 0 1.5rem;
-            animation: slideUp 0.6s ease-out;
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .login-logo {
-            width: 72px; height: 72px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            margin-bottom: 1.25rem;
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
-            animation: logoPulse 3s ease-in-out infinite;
-        }
-        @keyframes logoPulse {
-            0%, 100% { box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4); }
-            50% { box-shadow: 0 8px 40px rgba(99, 102, 241, 0.6); }
-        }
-        .login-header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 6px;
-        }
-        .login-header p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        .login-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-        .form-label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #94a3b8;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .input-wrapper {
-            position: relative;
-        }
-        .input-wrapper i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #64748b;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-        .form-control {
-            width: 100%;
-            padding: 14px 16px 14px 46px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            color: #f1f5f9;
-            font-size: 0.95rem;
-            font-family: inherit;
-            transition: all 0.3s;
-            outline: none;
-        }
-        .form-control:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-        }
-        .form-control:focus + i, .form-control:focus ~ i {
-            color: #818cf8;
-        }
-        .form-control::placeholder {
-            color: #4a5568;
-        }
-        .form-error {
-            color: #f87171;
-            font-size: 0.8rem;
-            margin-top: 6px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .remember-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 1.5rem;
-        }
-        .remember-row input[type="checkbox"] {
-            width: 18px; height: 18px;
-            accent-color: #6366f1;
-            cursor: pointer;
-        }
-        .remember-row label {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            cursor: pointer;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
-        }
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-        }
-        .btn-login:active {
-            transform: translateY(0);
-        }
-
-        .login-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #64748b;
-            font-size: 0.8rem;
-        }
-        .login-footer .credentials {
-            margin-top: 1rem;
-            padding: 12px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 10px;
-            font-size: 0.8rem;
-            color: #a5b4fc;
-        }
-        .login-footer .credentials code {
-            color: #c4b5fd;
-            font-weight: 600;
-        }
+        ::-webkit-scrollbar { display: none; }
     </style>
+
+    <!-- Tailwind CSS with Stitch Theme Configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#0b1c30",
+                        "on-primary-fixed-variant": "#3b35a7",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "tertiary-fixed": "#89f5e7",
+                        "surface-container": "#e5eeff",
+                        "background": "#f8f9ff",
+                        "on-surface-variant": "#464553",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#544fc0",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary-container": "#57657a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-primary-container": "#a9a7ff",
+                        "inverse-surface": "#213145",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#eff4ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary": "#00332e",
+                        "surface-variant": "#d3e4fe",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed": "#d5e3fc",
+                        "primary-fixed": "#e2dfff",
+                        "surface": "#f8f9ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed": "#00201d",
+                        "primary": "#1f108e",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#3730a3",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#52c1b4",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "outline-variant": "#c8c4d5",
+                        "outline": "#777584",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary-container": "#004c45",
+                        "secondary": "#515f74"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "code-sm": ["monospace"]
+                    }
+                }
+            }
+        };
+    </script>
 </head>
-<body>
-    <div class="bg-gradient"></div>
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+<body class="bg-background font-body-md text-on-surface antialiased min-h-screen">
+    <main class="w-full min-h-screen bg-background flex flex-col justify-center items-center">
+        <div class="flex flex-col w-full">
+            <div class="w-full flex flex-col lg:flex-row min-h-screen">
+                <!-- Left Hero & Branding Showcase Panel -->
+                <div class="w-full lg:w-1/2 bg-gradient-to-br from-primary-container via-primary to-inverse-surface relative overflow-hidden flex flex-col justify-between p-8 sm:p-12 lg:p-16 text-on-primary">
+                    <!-- Architectural Atmospheric Gradients -->
+                    <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-fixed-dim/20 blur-3xl pointer-events-none"></div>
+                    <div class="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-tertiary-fixed-dim/10 blur-3xl pointer-events-none"></div>
 
-    <div class="login-container">
-        <div class="login-header">
-            <div class="login-logo">
-                <i class="fas fa-book-open"></i>
-            </div>
-            <h1>Sistem Perpustakaan</h1>
-            <p>Masuk untuk mengelola koleksi buku</p>
-        </div>
-
-        <div class="login-card">
-            <form method="POST" action="{{ url('/login') }}" id="loginForm">
-                @csrf
-
-                <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <div class="input-wrapper">
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            class="form-control"
-                            placeholder="Masukkan email anda"
-                            value="{{ old('email') }}"
-                            required
-                            autofocus
-                        >
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    @error('email')
-                        <div class="form-error">
-                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                    <!-- Top Header Brand Element -->
+                    <div class="relative z-10 flex items-center gap-3.5">
+                        <div class="w-12 h-12 rounded-xl bg-surface-container-lowest p-2 shadow-xl flex items-center justify-center text-primary-container">
+                            <span class="material-symbols-outlined text-[28px]">menu_book</span>
                         </div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <div class="input-wrapper">
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="form-control"
-                            placeholder="Masukkan password anda"
-                            required
-                        >
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    @error('password')
-                        <div class="form-error">
-                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                        <div class="flex flex-col">
+                            <span class="font-headline-lg text-2xl font-bold tracking-tight text-white leading-none">KireiLibrary</span>
+                            <span class="font-label-sm text-xs text-primary-fixed-dim/80 uppercase tracking-widest mt-1">Perpustakaan yang Indah</span>
                         </div>
-                    @enderror
+                    </div>
+
+                    <!-- Central Library Aesthetic Composition -->
+                    <div class="relative z-10 my-10 lg:my-auto flex flex-col items-start max-w-lg">
+                        <!-- Archival Visual Motif -->
+                        <div class="w-full mb-8 relative p-6 rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl overflow-hidden border border-white/10">
+                            <div class="flex justify-between items-center mb-5 pb-3 border-b border-white/10">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+                                    <span class="font-code-sm text-xs text-surface-container-low/90 tracking-wide uppercase">Rak Utama • Zona 04</span>
+                                </div>
+                                <span class="font-label-sm text-xs bg-white/10 px-2.5 py-0.5 rounded-full text-white/90">Inventaris Terkini</span>
+                            </div>
+
+                            <!-- Stylized Modern Bookshelf Graphic -->
+                            <div class="relative h-44 w-full flex items-end justify-between px-2 pt-4">
+                                <!-- Book Spine Series -->
+                                <div class="flex items-end gap-1.5 h-full z-10">
+                                    <div class="w-4 h-32 rounded-t-sm bg-tertiary-fixed-dim/90 shadow-sm"></div>
+                                    <div class="w-6 h-40 rounded-t-sm bg-surface-container-lowest shadow-sm flex flex-col justify-center items-center py-2">
+                                        <span class="font-code-sm text-[8px] text-primary [writing-mode:vertical-rl] tracking-tighter opacity-80 uppercase font-semibold">SAINS-102</span>
+                                    </div>
+                                    <div class="w-5 h-28 rounded-t-sm bg-secondary-fixed shadow-sm"></div>
+                                    <div class="w-7 h-36 rounded-t-sm bg-primary-fixed-dim shadow-sm flex flex-col justify-end items-center pb-2">
+                                        <span class="w-3 h-0.5 bg-primary/40 rounded-full mb-1"></span>
+                                        <span class="w-3 h-0.5 bg-primary/40 rounded-full"></span>
+                                    </div>
+                                    <div class="w-5 h-24 rounded-t-sm bg-tertiary-fixed/80"></div>
+                                </div>
+
+                                <!-- Stylized Study Reading Desk with Lamp -->
+                                <div class="flex items-end z-10 gap-3">
+                                    <div class="flex flex-col items-center relative">
+                                        <div class="w-8 h-4 rounded-t-full bg-tertiary-fixed shadow-[0_0_24px_rgba(137,245,231,0.85)]"></div>
+                                        <div class="w-1 h-14 bg-surface-container-lowest/80"></div>
+                                        <div class="w-5 h-1.5 bg-surface-container-lowest/90 rounded-sm"></div>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-0.5 pb-0.5">
+                                        <div class="w-10 h-2 bg-primary-fixed rounded-sm shadow-xs"></div>
+                                        <div class="w-12 h-2.5 bg-surface-container-lowest rounded-sm shadow-xs"></div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 left-0 right-0 h-2 bg-surface-container-lowest/30 rounded-full backdrop-blur-sm"></div>
+                            </div>
+
+                            <!-- Bottom Metadata -->
+                            <div class="mt-4 pt-3 flex items-center justify-between text-white/70 font-label-sm text-xs border-t border-white/10">
+                                <span class="flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[15px] text-tertiary-fixed">auto_stories</span>
+                                    Koleksi Terintegrasi
+                                </span>
+                                <span class="flex items-center gap-1.5 font-code-sm text-xs">
+                                    <span class="material-symbols-outlined text-[15px] text-primary-fixed">verified</span>
+                                    Laravel 11 • MVC
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Tagline -->
+                        <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
+                            Kelola koleksi buku dengan mudah
+                        </h1>
+                        <p class="text-primary-fixed/90 leading-relaxed font-normal text-sm sm:text-base">
+                            Pusat pengelolaan repositori literatur, sirkulasi inventaris, dan katalogisasi arsip terintegrasi untuk pustakawan modern.
+                        </p>
+                    </div>
+
+                    <!-- Left Panel Institutional Meta Footer -->
+                    <div class="relative z-10 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-surface-container-low/75 border-t border-white/10">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span>Server Repositori Aktif (UTS Pemrograman Web)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span>Dewa Rama Daniel</span>
+                            <span>•</span>
+                            <span>09010582529115</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="remember-row">
-                    <input type="checkbox" id="remember" name="remember">
-                    <label for="remember">Ingat saya</label>
+                <!-- Right Half: Administrative Access Card -->
+                <div class="w-full lg:w-1/2 bg-background flex flex-col items-center justify-center p-6 sm:p-12 lg:p-16">
+                    <div class="w-full max-w-[440px] flex flex-col">
+                        <!-- White Elevated Card -->
+                        <div class="bg-surface-container-lowest rounded-2xl shadow-lg border border-slate-200/80 p-8 sm:p-10 flex flex-col transition-all">
+                            <!-- Header -->
+                            <div class="mb-6">
+                                <div class="inline-flex items-center gap-1.5 text-primary-container text-xs uppercase tracking-wider font-semibold mb-2">
+                                    <span class="material-symbols-outlined text-[16px]">lock_person</span>
+                                    Autentikasi Pengelola
+                                </div>
+                                <h2 class="text-2xl font-bold text-slate-900 tracking-tight leading-snug">Masuk ke KireiLibrary</h2>
+                                <p class="text-slate-500 text-sm mt-1.5">
+                                    Silakan masukkan kredensial akun pustakawan Anda.
+                                </p>
+                            </div>
+
+                            <!-- Error Alert Box -->
+                            @if ($errors->any())
+                                <div class="bg-red-50 border border-red-200 rounded-xl p-3.5 flex items-center gap-2.5 text-sm text-red-700 font-medium mb-6 animate-pulse" id="error-alert">
+                                    <span class="material-symbols-outlined text-red-600 text-[20px] flex-shrink-0">error</span>
+                                    <span class="flex-1">{{ $errors->first() }}</span>
+                                    <button class="text-red-400 hover:text-red-700 focus:outline-none" onclick="document.getElementById('error-alert').remove()" type="button">
+                                        <span class="material-symbols-outlined text-[18px]">close</span>
+                                    </button>
+                                </div>
+                            @endif
+
+                            <!-- Login Form -->
+                            <form method="POST" action="{{ url('/login') }}" class="flex flex-col gap-4">
+                                @csrf
+
+                                <!-- Email -->
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-xs font-semibold text-slate-700 tracking-wide" for="librarian-email">
+                                        Email
+                                    </label>
+                                    <div class="relative flex items-center">
+                                        <input 
+                                            class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition" 
+                                            id="librarian-email" 
+                                            name="email" 
+                                            placeholder="admin@perpustakaan.com" 
+                                            required 
+                                            type="email" 
+                                            value="{{ old('email', 'admin@perpustakaan.com') }}"
+                                            autofocus
+                                        >
+                                        <div class="absolute right-3 pointer-events-none text-slate-400 flex items-center">
+                                            <span class="material-symbols-outlined text-[18px]">mail</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Password with Interactive Toggle -->
+                                <div class="flex flex-col gap-1.5">
+                                    <div class="flex justify-between items-center">
+                                        <label class="text-xs font-semibold text-slate-700 tracking-wide" for="librarian-password">
+                                            Password
+                                        </label>
+                                    </div>
+                                    <div class="relative flex items-center">
+                                        <input 
+                                            class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition pr-10" 
+                                            id="librarian-password" 
+                                            name="password" 
+                                            placeholder="Masukkan kata sandi" 
+                                            required 
+                                            type="password"
+                                            value="password"
+                                        >
+                                        <button 
+                                            aria-label="Lihat atau sembunyikan kata sandi" 
+                                            class="absolute right-2.5 p-1 text-slate-400 hover:text-slate-700 focus:outline-none rounded flex items-center justify-center transition" 
+                                            id="toggle-password-btn" 
+                                            onclick="togglePasswordVisibility()" 
+                                            type="button"
+                                        >
+                                            <span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Remember me -->
+                                <div class="flex items-center justify-between pt-1">
+                                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                                        <input 
+                                            checked 
+                                            class="w-4 h-4 rounded border-slate-300 text-indigo-700 accent-indigo-700 focus:ring-indigo-600 cursor-pointer" 
+                                            id="remember-me" 
+                                            name="remember" 
+                                            type="checkbox"
+                                        >
+                                        <span class="text-xs text-slate-600 font-medium hover:text-slate-800 transition">Ingat saya</span>
+                                    </label>
+                                    <span class="text-xs text-slate-400">Akses Terlindungi</span>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button 
+                                    class="w-full mt-2 bg-[#3730A3] hover:bg-indigo-800 text-white font-semibold py-2.5 rounded-lg shadow-sm transition flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer" 
+                                    type="submit"
+                                >
+                                    <span>Masuk</span>
+                                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                                </button>
+                            </form>
+
+                            <!-- Demo Credentials Helper -->
+                            <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col gap-1 text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200/60">
+                                <div class="font-semibold text-slate-700 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px] text-indigo-600">badge</span>
+                                    Akun Demo Penguji / Dosen:
+                                </div>
+                                <div class="flex justify-between text-slate-600 font-mono text-[11px] mt-0.5">
+                                    <span>Email: <strong>admin@perpustakaan.com</strong></span>
+                                    <span>Pass: <strong>password</strong></span>
+                                </div>
+                            </div>
+
+                            <!-- Security Badge -->
+                            <div class="mt-4 flex items-center justify-center gap-2 text-xs text-slate-400 font-medium">
+                                <span class="material-symbols-outlined text-[16px] text-emerald-600">verified_user</span>
+                                <span>Koneksi Terenkripsi & Aman</span>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="text-center mt-6">
+                            <p class="text-xs text-slate-400 font-normal">© 2026 KireiLibrary • UTS Pemrograman Web</p>
+                        </div>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn-login">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Masuk
-                </button>
-            </form>
-        </div>
-
-        <div class="login-footer">
-            <div class="credentials">
-                <strong>Demo Login:</strong><br>
-                Email: <code>admin@perpustakaan.com</code><br>
-                Password: <code>password</code>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Toggle Password Visibility Script -->
+    <script>
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('librarian-password');
+            const eyeIcon = document.getElementById('eye-icon');
+            
+            if (!passwordField || !eyeIcon) return;
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.textContent = 'visibility_off';
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.textContent = 'visibility';
+            }
+        }
+    </script>
 </body>
 </html>
